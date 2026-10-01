@@ -10,16 +10,32 @@ docwrite reads through your codebase, understands what it does, and drafts a REA
 
 - **Private** — your code is never sent to a cloud API
 - **Free** — no API keys, no per-token cost
-- **Flexible** — auto-detects and uses whatever Ollama model you already have installed (Llama 3, Mistral, DeepSeek Coder, etc.)
+- **Flexible** — auto-detects and uses whatever Ollama model you already have installed
 
 ## Requirements
 
-- [Ollama](https://ollama.com) installed, with at least one model pulled
-- Node.js and Python installed
+- [Ollama](https://ollama.com) installed and running, with at least one model pulled (e.g. `ollama pull qwen2.5-coder:1.5b`)
+- Python 3
 
-## Quickstart
+## Usage
 
 ```bash
 git clone https://github.com/sengoraku/docwrite.git
-cd docwrite
-# setup + usage instructions coming soon
+cd docwrite/python
+python3 main.py /path/to/your/project
+```
+
+This generates a `README.md` directly inside the target project folder.
+
+## Known limitations
+
+- Smaller local models can occasionally invent plausible-but-incorrect setup details (e.g. a placeholder git URL, assumed dependency files that don't exist). Always review the generated README before publishing it.
+- Generation speed depends on your hardware — CPU-only inference can take a minute or more for larger codebases.
+
+## Status
+
+🚧 Early development — core pipeline works, polish and a proper CLI wrapper coming.
+
+## License
+
+MIT
