@@ -103,7 +103,7 @@ def generate_readme(model, code_context):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python main.py /path/to/project")
+        print("Usage: python main.py /path/to/project [model_name]")
         sys.exit(1)
 
     target_path = sys.argv[1]
@@ -111,9 +111,13 @@ def main():
         print(f"Error: '{target_path}' is not a valid directory.")
         sys.exit(1)
 
-    print("Detecting installed Ollama model...")
-    model = get_installed_model()
-    print(f"Using model: {model}")
+    if len(sys.argv) >= 3:
+        model = sys.argv[2]
+        print(f"Using manually specified model: {model}")
+    else:
+        print("Detecting installed Ollama model...")
+        model = get_installed_model()
+        print(f"Using model: {model}")
 
     print("Reading codebase...")
     code_context = read_codebase(target_path)
